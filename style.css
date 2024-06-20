@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: #33001b;
+  color: #fff;
+  font-family: "Cairo", sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 3.5rem;
+  padding: 2.5rem;
+  direction: rtl;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lt_s {
+  position: relative;
+}
+.lt_s h3 {
+  font-size: 6rem;
+  font-weight: 600;
+}
+
+.header .rt_s {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.hijri_date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.5rem;
+}
+
+.prayers_cards {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.card {
+  padding: 1rem;
+  padding-top: 2.5rem;
+  background-color: #fff;
+  color: #000;
+  border-radius: 20px;
+}
+
+.card .prayer_name {
+  font-size: 1.75rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.card .prayer_time {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.85;
+  user-select: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.message p {
+  font-size: 1.75rem;
+}
+
+@media screen and (max-width: 1260px) {
+  .prayers_cards {
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .prayers_cards {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .prayers_cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1rem;
+    padding-top: 1.5rem;
+  }
+}
