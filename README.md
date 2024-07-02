@@ -1,1 +1,1 @@
-# prayer-time-api
+# Prayer Time API
