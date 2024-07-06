@@ -23,10 +23,13 @@ async function fetchData() {
       `http://api.geoapify.com/v1/ipinfo?&apiKey=bad03c4951e34a888fb649f396caeaa6`
     );
 
+    if (!response.ok) {
+      throw new Error("Failed to fetch IP info");
+    }
+
     const result = await response.json();
     const { location } = result;
-    let { latitude } = location;
-    let { longitude } = location;
+    const { latitude, longitude } = location;
 
     await setCoord(latitude, longitude);
 
@@ -42,6 +45,11 @@ async function setCoord(lat, lng) {
     const response = await fetch(
       `http://api.aladhan.com/v1/timings/${currentDay}-${currentMonth}-${currentYear}?latitude=${lat}&longitude=${lng}&method=5&adjustment=1`
     );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch prayer timings");
+    }
+
     const json = await response.json();
 
     if (json.status == "OK") {
@@ -61,16 +69,15 @@ async function setCoord(lat, lng) {
         { prayerName: "العشاء", prayerTime: Isha },
       ];
 
-      prayers
-        .map(({ prayerName, prayerTime }) => {
-          return `<div class="card">
-            <div class="prayer_name">${prayerName}</div>
-            <div class="prayer_time">${prayerTime}</div>
-        </div>`;
-        })
-        .forEach((card) => {
-          prayersCards.innerHTML += card;
-        });
+      prayers.forEach(({ prayerName, prayerTime }) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <div class="prayer_name">${prayerName}</div>
+          <div class="prayer_time">${prayerTime}</div>
+        `;
+        prayersCards.appendChild(card);
+      });
     }
   } catch (error) {
     showErrorMessage(error);
